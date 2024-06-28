@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
-  version: '1.0.0'
-  title: "EEJI Cloudfnt-Backend API Reference v1.0.0"
+  version: '1.0.1'
+  title: "EEJI Cloudfnt-Backend API Reference v1.0.1"
   description: This document represents API reference of the EEJI Cloudfnt-Backend service.
   license:
     name: MIT
@@ -15,33 +15,33 @@ consumes:
 produces:
 - application/json
 paths:
-  /v1/save_new:
+  /v1/save_new/{object_name}:
     x-summary: Save new dataset
     post:
       summary: Save new dataset
       tags:
         - Data
       parameters:
-      - name: "user-id"
-        in: "header"
+      - name: "object_name"
+        in: "path"
         type: "string"
         required: true
-        description: "user id"
+        description: "object name to save"
       - name: "company-id"
         in: "header"
         type: "string"
         required: true
         description: "company id"
+      - name: "user-id"
+        in: "header"
+        type: "string"
+        required: true
+        description: "user id"
       - name: "auth-token"
         in: "header"
         type: "string"
         required: true
         description: "auth token"
-      - name: "data-id"
-        in: "header"
-        type: "string"
-        required: true
-        description: "The data ID"
       - name: "body"
         in: body
         description: save_new request body
@@ -136,7 +136,7 @@ paths:
         500:
           description: "Internal server error"
           
-  /v1/get_signed_url:
+  /v1/get_signed_url/{object_name}:
     x-summary: Get a signed URL
     get:
       summary: Get a signed URL to upload data
@@ -158,8 +158,8 @@ paths:
         type: "string"
         required: true
         description: "auth token"
-      - name: "object-name"
-        in: "query"
+      - name: "object_name"
+        in: "path"
         required: true
         type: "string"
         description: "object name to upload"
@@ -167,11 +167,7 @@ paths:
         200:
           description: "OK"
           schema:
-            type: "object" 
-            properties:
-              state:
-                type: string
-                description: "Current State"
+            $ref: "#/definitions/get_signed_url"
         401:
           description: "Unauthorized"
           schema:
@@ -181,13 +177,18 @@ paths:
         500:
           description: "Internal server error"
   
-  /v1/notify_upload:
+  /v1/notify_upload/{object_name}:
     x-summary: Notify upload status
     post:
       summary: Notify user-data upload status
       tags:
         - Data
       parameters:
+      - name: "object_name"
+        in: "path"
+        required: true
+        type: "string"
+        description: "object name"
       - name: "user-id"
         in: "header"
         type: "string"
@@ -196,21 +197,16 @@ paths:
         in: "header"
         type: "string"
         required: true
-      - name: "data-id"
-        in: "header"
-        type: "string"
-        required: true
-        description: "The data ID to notify it upload status"
       - name: "status"
         in: "query"
         type: "string"
         enum: [start, fail, cancel, success]
         required: true
-      - name: "data-size"
+      - name: "object-size"
         in: "header"
         type: "number"
         required: false
-        description: "upload object size in bytes"
+        description: "upload object size in bytes. Allowed only when status=success"
       responses:
         200:
           description: "OK"
@@ -313,7 +309,6 @@ definitions:
     required:
     - "signed_url"
     - "expiration"
-    - "data_id"
     properties:
       expiration:
         type: "string"
@@ -321,10 +316,7 @@ definitions:
       signed_url:
         type: "string"
         description: "The signed url of the GCS object"
-      data_id:
-        type: "string"
-        description: "The data id used for the key"
-  
+
   resp_bad_request:
     type: "object" 
     properties:
