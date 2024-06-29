@@ -1,7 +1,7 @@
-swagger: '2.0'
+swagger: "2.0"
 info:
-  version: '1.0.1'
-  title: "EEJI Cloudfnt-Backend API Reference v1.0.1"
+  version: "1.0.2"
+  title: "EEJI Cloudfnt-Backend API Reference v1.0.2"
   description: This document represents API reference of the EEJI Cloudfnt-Backend service.
   license:
     name: MIT
@@ -9,11 +9,11 @@ info:
 host: cloudfnt-bnd-prod.infinite-optimal.com
 basePath: /api
 schemes:
-- https
+  - https
 consumes:
-- application/json
+  - application/json
 produces:
-- application/json
+  - application/json
 paths:
   /v1/save_new/{object_name}:
     x-summary: Save new dataset
@@ -22,33 +22,33 @@ paths:
       tags:
         - Data
       parameters:
-      - name: "object_name"
-        in: "path"
-        type: "string"
-        required: true
-        description: "object name to save"
-      - name: "company-id"
-        in: "header"
-        type: "string"
-        required: true
-        description: "company id"
-      - name: "user-id"
-        in: "header"
-        type: "string"
-        required: true
-        description: "user id"
-      - name: "auth-token"
-        in: "header"
-        type: "string"
-        required: true
-        description: "auth token"
-      - name: "body"
-        in: body
-        description: save_new request body
-        required: true
-        schema:
-          type: "object"
-          $ref: '#/definitions/new_dataset'
+        - name: "object_name"
+          in: "path"
+          type: "string"
+          required: true
+          description: "object name to save"
+        - name: "company-id"
+          in: "header"
+          type: "string"
+          required: true
+          description: "company id"
+        - name: "user-id"
+          in: "header"
+          type: "string"
+          required: true
+          description: "user id"
+        - name: "Authorization"
+          in: "header"
+          type: "string"
+          required: true
+          description: "auth token"
+        - name: "body"
+          in: body
+          description: save_new request body
+          required: true
+          schema:
+            type: "object"
+            $ref: "#/definitions/new_dataset"
       responses:
         200:
           description: "OK"
@@ -64,7 +64,7 @@ paths:
         422:
           description: "Unprocessable Entity"
         500:
-          description: "Internal server error"  
+          description: "Internal server error"
   /v1/list_model:
     x-summary: List models
     get:
@@ -72,16 +72,16 @@ paths:
       tags:
         - Model
       parameters:
-      - name: "user-id"
-        in: "header"
-        type: "string"
-        required: true
-        description: "user id"
-      - name: "auth-token"
-        in: "header"
-        type: "string"
-        required: true
-        description: "auth token"
+        - name: "user-id"
+          in: "header"
+          type: "string"
+          required: true
+          description: "user id"
+        - name: "Authorization"
+          in: "header"
+          type: "string"
+          required: true
+          description: "auth token"
       responses:
         200:
           description: "OK"
@@ -98,7 +98,7 @@ paths:
           description: "Unprocessable Entity"
         500:
           description: "Internal server error"
-          
+
   /v1/describe_model:
     x-summary: Describe a model
     get:
@@ -106,21 +106,21 @@ paths:
       tags:
         - Model
       parameters:
-      - name: "user-id"
-        in: "header"
-        type: "string"
-        required: true
-        description: "user id"
-      - name: "auth-token"
-        in: "header"
-        type: "string"
-        required: true
-        description: "auth token"
-      - name: "model-id"
-        in: "header"
-        type: "string"
-        required: true
-        description: "model id to describe"
+        - name: "user-id"
+          in: "header"
+          type: "string"
+          required: true
+          description: "user id"
+        - name: "Authorization"
+          in: "header"
+          type: "string"
+          required: true
+          description: "auth token"
+        - name: "model-id"
+          in: "header"
+          type: "string"
+          required: true
+          description: "model id to describe"
       responses:
         200:
           description: "OK"
@@ -135,7 +135,7 @@ paths:
           description: "Unprocessable Entity"
         500:
           description: "Internal server error"
-          
+
   /v1/get_signed_url/{object_name}:
     x-summary: Get a signed URL
     get:
@@ -143,26 +143,26 @@ paths:
       tags:
         - Data
       parameters:
-      - name: "company-id"
-        in: "header"
-        type: "string"
-        required: true
-        description: "company id"
-      - name: "user-id"
-        in: "header"
-        type: "string"
-        required: true
-        description: "user id"
-      - name: "auth-token"
-        in: "header"
-        type: "string"
-        required: true
-        description: "auth token"
-      - name: "object_name"
-        in: "path"
-        required: true
-        type: "string"
-        description: "object name to upload"
+        - name: "company-id"
+          in: "header"
+          type: "string"
+          required: true
+          description: "company id"
+        - name: "user-id"
+          in: "header"
+          type: "string"
+          required: true
+          description: "user id"
+        - name: "Authorization"
+          in: "header"
+          type: "string"
+          required: true
+          description: "auth token"
+        - name: "object_name"
+          in: "path"
+          required: true
+          type: "string"
+          description: "object name to upload"
       responses:
         200:
           description: "OK"
@@ -176,7 +176,7 @@ paths:
           description: "Unprocessable Entity"
         500:
           description: "Internal server error"
-  
+
   /v1/notify_upload/{object_name}:
     x-summary: Notify upload status
     post:
@@ -184,32 +184,38 @@ paths:
       tags:
         - Data
       parameters:
-      - name: "object_name"
-        in: "path"
-        required: true
-        type: "string"
-        description: "object name"
-      - name: "user-id"
-        in: "header"
-        type: "string"
-        required: true
-      - name: "auth-token"
-        in: "header"
-        type: "string"
-        required: true
-      - name: "status"
-        in: "query"
-        type: "string"
-        enum: [start, fail, cancel, success]
-        required: true
-      - name: "object-size"
-        in: "header"
-        type: "number"
-        required: false
-        description: "upload object size in bytes. Allowed only when status=success"
+        - name: "object_name"
+          in: "path"
+          required: true
+          type: "string"
+          description: "object name"
+        - name: "user-id"
+          in: "header"
+          type: "string"
+          required: true
+        - name: "Authorization"
+          in: "header"
+          type: "string"
+          required: true
+        - name: "status"
+          in: "query"
+          type: "string"
+          enum: [start, fail, cancel, success]
+          required: true
+        - name: "object-size"
+          in: "header"
+          type: "number"
+          required: false
+          description: "upload object size in bytes. Allowed only when status=success"
       responses:
         200:
           description: "OK"
+          schema:
+            type: "object"
+            properties:
+              state:
+                type: string
+                description: "Current State"
         401:
           description: "Unauthorized"
           schema:
@@ -224,7 +230,7 @@ definitions:
     title: new_dataset
     type: "object"
     required:
-    - "data_name"
+      - "data_name"
     properties:
       is_classification:
         type: "boolean"
@@ -241,7 +247,7 @@ definitions:
       date_column:
         type: "string"
         description: "(optional) The date column"
-  
+
   model_information:
     title: model_information
     type: "object"
@@ -276,7 +282,7 @@ definitions:
       error_rate:
         type: "number"
         description: "The error rate"
-        
+
   model_summary:
     title: model_summary
     type: "object"
@@ -302,13 +308,13 @@ definitions:
       created-at:
         type: "string"
         description: "The datetime when the model is created (ISO format)"
-  
+
   get_signed_url:
     title: get_signed_url
     type: "object"
     required:
-    - "signed_url"
-    - "expiration"
+      - "signed_url"
+      - "expiration"
     properties:
       expiration:
         type: "string"
@@ -318,13 +324,13 @@ definitions:
         description: "The signed url of the GCS object"
 
   resp_bad_request:
-    type: "object" 
+    type: "object"
     properties:
       message:
         type: string
         description: "Error reason"
   resp_unauthorized:
-    type: "object" 
+    type: "object"
     properties:
       message:
         type: string
