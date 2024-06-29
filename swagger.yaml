@@ -210,6 +210,12 @@ paths:
       responses:
         200:
           description: "OK"
+          schema:
+            type: "object"
+            properties:
+              state:
+                type: string
+                description: "Current State"
         401:
           description: "Unauthorized"
           schema:
