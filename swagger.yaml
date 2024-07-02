@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
-  version: "1.0.2"
-  title: "EEJI Cloudfnt-Backend API Reference v1.0.2"
+  version: "1.0.3"
+  title: "EEJI Cloudfnt-Backend API Reference"
   description: This document represents API reference of the EEJI Cloudfnt-Backend service.
   license:
     name: MIT
@@ -189,6 +189,11 @@ paths:
           required: true
           type: "string"
           description: "object name"
+        - name: "company-id"
+          in: "header"
+          type: "string"
+          required: true
+          description: "company id"
         - name: "user-id"
           in: "header"
           type: "string"
