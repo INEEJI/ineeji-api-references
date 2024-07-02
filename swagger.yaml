@@ -189,6 +189,11 @@ paths:
           required: true
           type: "string"
           description: "object name"
+        - name: "company-id"
+          in: "header"
+          type: "string"
+          required: true
+          description: "company id"
         - name: "user-id"
           in: "header"
           type: "string"
