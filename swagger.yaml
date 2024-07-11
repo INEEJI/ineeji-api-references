@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  version: "1.0.3"
+  version: "1.0.4"
   title: "EEJI Cloudfnt-Backend API Reference"
   description: This document represents API reference of the EEJI Cloudfnt-Backend service.
   license:
@@ -82,6 +82,11 @@ paths:
           type: "string"
           required: true
           description: "auth token"
+        - name: "EEJI-Test-Code"
+          in: "header"
+          type: "string"
+          required: false
+          description: "custom header for testing"
       responses:
         200:
           description: "OK"
@@ -116,6 +121,11 @@ paths:
           type: "string"
           required: true
           description: "auth token"
+        - name: "EEJI-Test-Code"
+          in: "header"
+          type: "string"
+          required: false
+          description: "custom header for testing"
         - name: "model-id"
           in: "header"
           type: "string"
