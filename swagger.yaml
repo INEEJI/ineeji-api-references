@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  version: "1.0.5"
+  version: "1.0.6"
   title: "EEJI Cloudfnt-Backend API Reference"
   description: This document represents API reference of the EEJI Cloudfnt-Backend service.
   license:
@@ -104,7 +104,7 @@ paths:
         500:
           description: "Internal server error"
 
-  /v1/describe_model:
+  /v1/describe_model/{model_id}:
     x-summary: Describe a model
     get:
       summary: Describe a model
@@ -116,6 +116,11 @@ paths:
           type: "string"
           required: true
           description: "user id"
+        - name: "company-id"
+          in: "header"
+          type: "string"
+          required: true
+          description: "company id"
         - name: "Authorization"
           in: "header"
           type: "string"
@@ -126,11 +131,6 @@ paths:
           type: "string"
           required: false
           description: "custom header for testing"
-        - name: "model-id"
-          in: "header"
-          type: "string"
-          required: true
-          description: "model id to describe"
       responses:
         200:
           description: "OK"
@@ -266,6 +266,16 @@ definitions:
   model_information:
     title: model_information
     type: "object"
+    required:
+      - "id"
+      - "name"
+      - "description"
+      - "target"
+      - "state"
+      - "created_at"
+      - "updated_at"
+      - "dataset_name"
+
     properties:
       id:
         type: "string"
@@ -291,15 +301,12 @@ definitions:
       dataset_name:
         type: "string"
         description: "The name of dataset"
-        required: false
       accuracy:
         type: "number"
         description: "The model accuracy"
-        required: false
       error_rate:
         type: "number"
         description: "The error rate"
-        required: false
 
   model_summary:
     title: model_summary
@@ -309,7 +316,7 @@ definitions:
       - "name"
       - "target"
       - "state"
-      - "created-at"
+      - "created_at"
     properties:
       id:
         type: "string"
