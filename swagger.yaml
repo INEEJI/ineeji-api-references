@@ -111,6 +111,11 @@ paths:
       tags:
         - Model
       parameters:
+        - name: "model_id"
+          in: "path"
+          type: "string"
+          required: true
+          description: "model id"
         - name: "user-id"
           in: "header"
           type: "string"
@@ -275,7 +280,6 @@ definitions:
       - "created_at"
       - "updated_at"
       - "dataset_name"
-
     properties:
       id:
         type: "string"
