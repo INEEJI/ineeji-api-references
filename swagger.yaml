@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  version: "1.0.4"
+  version: "1.0.5"
   title: "EEJI Cloudfnt-Backend API Reference"
   description: This document represents API reference of the EEJI Cloudfnt-Backend service.
   license:
@@ -282,21 +282,24 @@ definitions:
       state:
         type: "string"
         description: "The status of the model"
-      created-at:
+      created_at:
         type: "string"
         description: "The datetime when the model is created (ISO format)"
-      updated-at:
+      updated_at:
         type: "string"
         description: "The datetime when the model is updated (ISO format)"
       dataset_name:
         type: "string"
         description: "The name of dataset"
+        required: false
       accuracy:
         type: "number"
         description: "The model accuracy"
+        required: false
       error_rate:
         type: "number"
         description: "The error rate"
+        required: false
 
   model_summary:
     title: model_summary
@@ -320,7 +323,7 @@ definitions:
       state:
         type: "string"
         description: "The status of the model"
-      created-at:
+      created_at:
         type: "string"
         description: "The datetime when the model is created (ISO format)"
 
