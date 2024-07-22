@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  version: "1.0.6"
+  version: "1.0.7"
   title: "EEJI Cloudfnt-Backend API Reference"
   description: This document represents API reference of the EEJI Cloudfnt-Backend service.
   license:
@@ -245,6 +245,41 @@ paths:
         500:
           description: "Internal server error"
 
+  /v1/get_model_download_url/{model_id}: 
+    x-summary: Get a signed download URL to model result
+    get:
+      summary: Get a signed download URL to model result
+      tags:
+        - Data
+      parameters:
+        - name: "company-id"
+          in: "header"
+          type: "string"
+          required: true
+          description: "company id"
+        - name: "user-id"
+          in: "header"
+          type: "string"
+          required: true
+          description: "user id"
+        - name: "Authorization"
+          in: "header"
+          type: "string"
+          required: true
+          description: "auth token"
+        - name: "model_id"
+          in: "path"
+          required: true
+          type: "string"
+          description: "model ID to download"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/get_model_download_signed_url"
+        500:
+          description: "Internal server error"
+
 definitions:
   new_dataset:
     title: new_dataset
@@ -340,6 +375,20 @@ definitions:
 
   get_signed_url:
     title: get_signed_url
+    type: "object"
+    required:
+      - "signed_url"
+      - "expiration"
+    properties:
+      expiration:
+        type: "string"
+        description: "The expiration datetime of the signed url (ISO format)"
+      signed_url:
+        type: "string"
+        description: "The signed url of the GCS object"
+
+  get_model_download_signed_url:
+    title: get_model_download_signed_url
     type: "object"
     required:
       - "signed_url"
