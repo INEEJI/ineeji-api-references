@@ -246,7 +246,7 @@ paths:
           description: "Internal server error"
 
   /v1/get_model_download_url/{model_id}: 
-    x-summary: Get a signed download URL to model result
+    x-summary: download URL to model result
     get:
       summary: Get a signed download URL to model result
       tags:
@@ -271,7 +271,7 @@ paths:
           in: "path"
           required: true
           type: "string"
-          description: "model ID to download"
+          description: "model ID to downloading result"
       responses:
         200:
           description: "OK"
