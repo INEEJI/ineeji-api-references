@@ -244,7 +244,8 @@ paths:
           description: "Unprocessable Entity"
         500:
           description: "Internal server error"
-  /v1/get_model_download_url/{model_id}: 
+          
+  /v1/get_model_download_url/{model-id}: 
     x-summary: Get a signed download URL to model result
     get:
       summary: Get a signed download URL to model result
@@ -278,7 +279,6 @@ paths:
             $ref: "#/definitions/get_model_download_signed_url"
         500:
           description: "Internal server error"
-
 
 definitions:
   new_dataset:
@@ -386,7 +386,7 @@ definitions:
       signed_url:
         type: "string"
         description: "The signed url of the GCS object"
-
+        
   get_model_download_signed_url:
     title: get_model_download_signed_url
     type: "object"
