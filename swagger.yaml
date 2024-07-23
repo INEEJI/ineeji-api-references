@@ -246,7 +246,7 @@ paths:
           description: "Internal server error"
           
   /v1/get_model_download_url/{model-id}: 
-    x-summary: Get a signed download URL to model result
+    x-summary: Get a signed download URL
     get:
       summary: Get a signed download URL to model result
       tags:
