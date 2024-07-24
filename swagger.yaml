@@ -374,7 +374,7 @@ definitions:
         type: "string"
         description: "The datetime when the model is created (ISO format)"
       is_classification:
-        type: "int"
+        type: "integer"
         description: "The flag indicating whether the model is classification (0: False, 1: True)"
 
 
