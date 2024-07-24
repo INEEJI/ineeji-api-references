@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  version: "1.0.9"
+  version: "1.0.10"
   title: "EEJI Cloudfnt-Backend API Reference"
   description: This document represents API reference of the EEJI Cloudfnt-Backend service.
   license:
@@ -356,6 +356,7 @@ definitions:
       - "target"
       - "state"
       - "created_at"
+      - "is_classification"
     properties:
       id:
         type: "string"
@@ -372,6 +373,10 @@ definitions:
       created_at:
         type: "string"
         description: "The datetime when the model is created (ISO format)"
+      is_classification:
+        type: "int"
+        description: "The flag indicating whether the model is classification (0: False, 1: True)"
+
 
   get_signed_url:
     title: get_signed_url
