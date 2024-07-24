@@ -354,9 +354,9 @@ definitions:
       - "id"
       - "name"
       - "target"
+      - "is_classification"
       - "state"
       - "created_at"
-      - "is_classification"
     properties:
       id:
         type: "string"
@@ -366,16 +366,16 @@ definitions:
         description: "The name of the model"
       target:
         type: "string"
-        description: "The target of the model - classification/prediction"
+        description: "The target of the model"
+      is_classification:
+        type: "integer"
+        description: "The flag indicating whether the model is classification (0: False, 1: True)"
       state:
         type: "string"
         description: "The status of the model"
       created_at:
         type: "string"
         description: "The datetime when the model is created (ISO format)"
-      is_classification:
-        type: "integer"
-        description: "The flag indicating whether the model is classification (0: False, 1: True)"
 
 
   get_signed_url:
