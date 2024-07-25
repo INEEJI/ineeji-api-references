@@ -368,8 +368,8 @@ definitions:
         type: "string"
         description: "The target of the model"
       is_classification:
-        type: "integer"
-        description: "The flag indicating whether the model is classification (0: False, 1: True)"
+        type: "boolean"
+        description: "The flag indicating whether the model is classification (True: classification, False: regression)"
       state:
         type: "string"
         description: "The status of the model"
