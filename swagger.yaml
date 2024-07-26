@@ -272,6 +272,11 @@ paths:
           required: true
           type: "string"
           description: "model ID to download result"
+        - name: "isxai"
+          in: "header"
+          type: "boolean"
+          required: true
+          description: "xai result or not (True: xai, False: trained model)"
       responses:
         200:
           description: "OK"
