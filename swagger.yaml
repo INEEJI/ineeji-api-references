@@ -15,6 +15,78 @@ consumes:
 produces:
   - application/json
 paths:
+  /v1/xai_result/count:
+      x-summary: Total XAI row count
+      get:
+        summary: Get total row count of XAI result
+        tags:
+          - XAI
+        parameters:
+          - name: "user-id"
+            in: "header"
+            type: "string"
+            required: true
+            description: "user id"
+          - name: "company-id"
+            in: "header"
+            type: "string"
+            required: true
+            description: "company id"
+          - name: "Authorization"
+            in: "header"
+            type: "string"
+            required: true
+            description: "auth token"
+        responses:
+          200:
+            description: "OK"
+            schema:
+              type: "number"
+              description: "Total row count number"
+          401:
+            description: "Unauthorized"
+            schema:
+              $ref: "#/definitions/resp_unauthorized"
+          500:
+            description: "Internal server error"
+  /v1/xai_result/offset={offset}&limit={limit}:
+      x-summary: XAI result based on conditions
+      get:
+        summary: Get XAI result based on conditions(offset, limit)
+        tags:
+          - XAI
+        parameters:
+          - name: "user-id"
+            in: "header"
+            type: "string"
+            required: true
+            description: "user id"
+          - name: "company-id"
+            in: "header"
+            type: "string"
+            required: true
+            description: "company id"
+          - name: "Authorization"
+            in: "header"
+            type: "string"
+            required: true
+            description: "auth token"
+        responses:
+          200:
+            description: "OK"
+            schema:
+              type: "object"
+              items:
+                type: "object"
+                $ref: "#/definitions/xai_result"
+          401:
+            description: "Unauthorized"
+            schema:
+              $ref: "#/definitions/resp_unauthorized"
+          500:
+            description: "Internal server error"
+
+
   /v1/save_new/{object_name}:
     x-summary: Save new dataset
     post:
@@ -286,6 +358,45 @@ paths:
           description: "Internal server error"
 
 definitions:
+
+   xai_result:
+    title: xai_result
+    type: "object"
+    required:
+      - "xai_pdp"
+      - "feature_length"
+      - "feature_list"
+      - "xai_global"
+      - "xai_local"
+      - "sample_size"
+      - "predict_result"
+      - "input_data"
+    properties:
+      xai_pdp:
+        type: "boolean"
+        description: "The pdp result by features"
+      feature_length:
+        type: "number"
+        description: "The number of features"
+      feature_list:
+        type: "array"
+        description: "The full list of features"
+      xai_global:
+        type: "object"
+        description: "The data to visualize xai(global)"
+      xai_local:
+        type: "object"
+        description: "The data to visualize xai(local)"
+      sample_size:
+        type: "number"
+        description: "The sample size"
+      predict_result:
+        type: "object"
+        description: "The prediction result"
+      input_data:
+        type: "object"
+        description: "The input data"
+
   new_dataset:
     title: new_dataset
     type: "object"
