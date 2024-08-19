@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  version: "1.0.10"
+  version: "1.0.11"
   title: "EEJI Cloudfnt-Backend API Reference"
   description: This document represents API reference of the EEJI Cloudfnt-Backend service.
   license:
@@ -272,6 +272,11 @@ paths:
           required: true
           type: "string"
           description: "model ID to download result"
+        - name: "isxai"
+          in: "header"
+          type: "boolean"
+          required: true
+          description: "xai result or not (True: xai, False: trained model)"
       responses:
         200:
           description: "OK"
