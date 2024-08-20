@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  version: "1.0.10"
+  version: "1.0.12"
   title: "EEJI Cloudfnt-Backend API Reference"
   description: This document represents API reference of the EEJI Cloudfnt-Backend service.
   license:
@@ -16,75 +16,86 @@ produces:
   - application/json
 paths:
   /v1/xai_result/count:
-      x-summary: Total XAI row count
-      get:
-        summary: Get total row count of XAI result
-        tags:
-          - XAI
-        parameters:
-          - name: "user-id"
-            in: "header"
-            type: "string"
-            required: true
-            description: "user id"
-          - name: "company-id"
-            in: "header"
-            type: "string"
-            required: true
-            description: "company id"
-          - name: "Authorization"
-            in: "header"
-            type: "string"
-            required: true
-            description: "auth token"
-        responses:
-          200:
-            description: "OK"
-            schema:
-              type: "number"
-              description: "Total row count number"
-          401:
-            description: "Unauthorized"
-            schema:
-              $ref: "#/definitions/resp_unauthorized"
-          500:
-            description: "Internal server error"
-  /v1/xai_result/offset={offset}&limit={limit}:
-      x-summary: XAI result based on conditions
-      get:
-        summary: Get XAI result based on conditions(offset, limit)
-        tags:
-          - XAI
-        parameters:
-          - name: "user-id"
-            in: "header"
-            type: "string"
-            required: true
-            description: "user id"
-          - name: "company-id"
-            in: "header"
-            type: "string"
-            required: true
-            description: "company id"
-          - name: "Authorization"
-            in: "header"
-            type: "string"
-            required: true
-            description: "auth token"
-        responses:
-          200:
-            description: "OK"
-            schema:
+    x-summary: Total XAI row count
+    get:
+      summary: Get total row count of XAI result
+      tags:
+        - XAI
+      parameters:
+        - name: "user-id"
+          in: "header"
+          type: "string"
+          required: true
+          description: "user id"
+        - name: "company-id"
+          in: "header"
+          type: "string"
+          required: true
+          description: "company id"
+        - name: "Authorization"
+          in: "header"
+          type: "string"
+          required: true
+          description: "auth token"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: "number"
+            description: "Total row count number"
+        401:
+          description: "Unauthorized"
+          schema:
+            $ref: "#/definitions/resp_unauthorized"
+        500:
+          description: "Internal server error"
+
+  /v1/xai_result?offset={offset}&limit={limit}:
+    x-summary: XAI result based on conditions
+    get:
+      summary: Get XAI result based on conditions(offset, limit)
+      tags:
+        - XAI
+      parameters:
+        - name: "offset"
+          in: "path"
+          type: "string"
+          required: true
+          description: "Current page number"
+        - name: "limit"
+          in: "path"
+          type: "string"
+          required: true
+          description: "Page size"
+        - name: "user-id"
+          in: "header"
+          type: "string"
+          required: true
+          description: "user id"
+        - name: "company-id"
+          in: "header"
+          type: "string"
+          required: true
+          description: "company id"
+        - name: "Authorization"
+          in: "header"
+          type: "string"
+          required: true
+          description: "auth token"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: "object"
+            items:
               type: "object"
-              items:
-                type: "object"
-                $ref: "#/definitions/xai_result"
-          401:
-            description: "Unauthorized"
-            schema:
-              $ref: "#/definitions/resp_unauthorized"
-          500:
-            description: "Internal server error"
+              $ref: "#/definitions/xai_result"
+        401:
+          description: "Unauthorized"
+          schema:
+            $ref: "#/definitions/resp_unauthorized"
+        500:
+          description: "Internal server error"
 
 
   /v1/save_new/{object_name}:
@@ -137,6 +148,7 @@ paths:
           description: "Unprocessable Entity"
         500:
           description: "Internal server error"
+
   /v1/list_model:
     x-summary: List models
     get:
@@ -354,7 +366,7 @@ paths:
 
 definitions:
 
-   xai_result:
+  xai_result:
     title: xai_result
     type: "object"
     required:
