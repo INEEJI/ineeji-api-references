@@ -61,12 +61,12 @@ paths:
           in: "path"
           type: "string"
           required: true
-          description: "Current page number"
+          description: "start index"
         - name: "limit"
           in: "path"
           type: "string"
           required: true
-          description: "Page size"
+          description: "count of data(i.e. page size)"
         - name: "user-id"
           in: "header"
           type: "string"
