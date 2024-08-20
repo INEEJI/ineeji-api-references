@@ -7,11 +7,11 @@ This repository is used to commit the API specifications shared between frontend
 
 
 ### Important 
-참고 : <https://help.apiary.io/tools/github-integration/#pulling-from-github>
 If a change is made on GitHub that results in an invalid API Description file, those changes will not be pulled down to Apiary. If a change cannot be pulled to Apiary due to the API Description file being invalid, a comment will be added to the commit in GitHub. 
 
 깃허브 저장소에 있는 API 문서에 에러가 있는 경우 Apiary에서 당겨지지 않으며, 그 반대의 경우도 (Apiary web을 통해 작성/수정한 문서에 오류가 있는 경우) github로 push할 수 없습니다.
 
+참고 : <https://help.apiary.io/tools/github-integration/#pulling-from-github>
 
 ### Trouble shooting
 
@@ -26,12 +26,12 @@ swagger.yaml 파일의 내용을 수정하고 새로운 버전으로 배포하�
 
 
 ### Github Sync 
-참고 : <https://help.apiary.io/tools/github-sync/>
 
 This repositoriy is synchronized with Apiary. You can push changes from Github or Apiary but it's still recommended to commit from the github side to ensure code review.
 
 양방향 동기화가 되어 있어 어느 곳에서든 수정 사항을 커밋할 수 있습니다만 코드 리뷰를 위해 되도록 github 에서 커밋하는 것을 권장드립니다.
 
+참고 : <https://help.apiary.io/tools/github-sync/>
 
 ### Github Integration  
 Please refer to the link below for information about Github integration.
