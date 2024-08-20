@@ -21,8 +21,9 @@ If the changes are not deployed on the web after merging, please check for any g
 
 
 ### Deploy 
-Update the contents of swagger.yaml with the new version. 오류가 없는 갱신된 파일은 자동으로 <https://eeji.docs.apiary.io/> 게시됩니다.
-swagger.yaml 파일의 내용을 수정하고 새로운 버전으로 배포하세요.
+Update the contents of swagger.yaml with the new version. The changes will be automatically reflected at <https://eeji.docs.apiary.io/>
+
+오류가 없는 갱신된 파일은 자동으로 <https://eeji.docs.apiary.io/> 게시됩니다. swagger.yaml 파일의 내용을 수정하고 새로운 버전으로 배포하세요.
 
 
 ### Github Sync 
