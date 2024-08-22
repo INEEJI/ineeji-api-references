@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  version: "1.0.13"
+  version: "1.0.14"
   title: "EEJI Cloudfnt-Backend API Reference"
   description: This document represents API reference of the EEJI Cloudfnt-Backend service.
   license:
@@ -15,6 +15,7 @@ consumes:
 produces:
   - application/json
 paths:
+  
   /v1/xai_result/count/{model_id}:
     x-summary: Total XAI row count
     get:
@@ -238,6 +239,55 @@ paths:
           description: "Unprocessable Entity"
         500:
           description: "Internal server error"
+
+  /v1/rename_model/{model_id}:
+      x-summary: Rename model name
+      post:
+        summary: Rename model name
+        tags:
+          - Model
+        parameters:
+          - name: "model_id"
+            in: "path"
+            type: "string"
+            required: true
+            description: "model id"
+          - name: "user-id"
+            in: "header"
+            type: "string"
+            required: true
+            description: "user id"
+          - name: "company-id"
+            in: "header"
+            type: "string"
+            required: true
+            description: "company id"
+          - name: "Authorization"
+            in: "header"
+            type: "string"
+            required: true
+            description: "auth token"
+          - name: "body"
+            in: body
+            description: model name to update
+            required: true
+            schema:
+              type: "object"
+              $ref: "#/definitions/model_name"
+        responses:
+          200:
+            description: "OK"
+            schema:
+              type: object
+              properties:
+                state:
+                  type: string
+          401:
+            description: "Unauthorized"
+            schema:
+              $ref: "#/definitions/resp_unauthorized"
+          500:
+            description: "Internal server error"
 
   /v1/get_signed_url/{object_name}:
     x-summary: Get a signed URL
@@ -518,6 +568,15 @@ definitions:
         type: "string"
         description: "The datetime when the model is created (ISO format)"
 
+  model_name:
+    title: model_name
+    type: "object"
+    required:
+      - "model_name"
+    properties: 
+      model_name:
+        type: "string"
+        description: "new model name to save"
 
   get_signed_url:
     title: get_signed_url
