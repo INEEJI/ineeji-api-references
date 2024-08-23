@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  version: "1.0.14"
+  version: "1.0.15"
   title: "EEJI Cloudfnt-Backend API Reference"
   description: This document represents API reference of the EEJI Cloudfnt-Backend service.
   license:
@@ -55,13 +55,18 @@ paths:
         500:
           description: "Internal server error"
 
-  /v1/xai_result?offset={offset}&limit={limit}:
+  /v1/xai_result/{model_id}?offset={offset}&limit={limit}:
     x-summary: XAI result based on conditions
     get:
       summary: Get XAI result based on conditions(offset, limit)
       tags:
         - XAI
       parameters:
+        - name: "model_id"
+          in: "path"
+          type: "string"
+          required: true
+          description: "model id"
         - name: "offset"
           in: "path"
           type: "string"
