@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  version: "1.0.15"
+  version: "1.0.16"
   title: "EEJI Cloudfnt-Backend API Reference"
   description: This document represents API reference of the EEJI Cloudfnt-Backend service.
   license:
@@ -247,7 +247,7 @@ paths:
 
   /v1/rename_model/{model_id}:
       x-summary: Rename model name
-      post:
+      patch:
         summary: Rename model name
         tags:
           - Model
@@ -287,6 +287,10 @@ paths:
               properties:
                 state:
                   type: string
+          400:
+            description: "Bad Request"
+            schema:
+              $ref: "#/definitions/resp_bad_request"
           401:
             description: "Unauthorized"
             schema:
