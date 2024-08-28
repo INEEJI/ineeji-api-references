@@ -233,7 +233,6 @@ paths:
         200:
           description: "OK"
           schema:
-            type: "object"
             $ref: "#/definitions/model_information"
         401:
           description: "Unauthorized"
