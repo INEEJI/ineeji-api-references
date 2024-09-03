@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  version: "1.0.16"
+  version: "1.0.19"
   title: "EEJI Cloudfnt-Backend API Reference"
   description: This document represents API reference of the EEJI Cloudfnt-Backend service.
   license:
@@ -277,6 +277,52 @@ paths:
             schema:
               type: "object"
               $ref: "#/definitions/model_name"
+        responses:
+          200:
+            description: "OK"
+            schema:
+              type: object
+              properties:
+                state:
+                  type: string
+          400:
+            description: "Bad Request"
+            schema:
+              $ref: "#/definitions/resp_bad_request"
+          401:
+            description: "Unauthorized"
+            schema:
+              $ref: "#/definitions/resp_unauthorized"
+          500:
+            description: "Internal server error"
+
+  /v1/delete_model/{model_id}:
+      x-summary: Delete model name
+      patch:
+        summary: Delete model name
+        tags:
+          - Model
+        parameters:
+          - name: "model_id"
+            in: "path"
+            type: "string"
+            required: true
+            description: "model id"
+          - name: "user-id"
+            in: "header"
+            type: "string"
+            required: true
+            description: "user id"
+          - name: "company-id"
+            in: "header"
+            type: "string"
+            required: true
+            description: "company id"
+          - name: "Authorization"
+            in: "header"
+            type: "string"
+            required: true
+            description: "auth token"
         responses:
           200:
             description: "OK"
