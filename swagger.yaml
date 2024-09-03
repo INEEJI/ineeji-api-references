@@ -664,12 +664,12 @@ definitions:
   resp_bad_request:
     type: "object"
     properties:
-      message:
+      detail:
         type: string
         description: "Error reason"
   resp_unauthorized:
     type: "object"
     properties:
-      message:
+      detail:
         type: string
         description: "Error reason"
