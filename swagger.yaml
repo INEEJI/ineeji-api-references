@@ -298,7 +298,7 @@ paths:
 
   /v1/delete_model/{model_id}:
       x-summary: Delete model name
-      patch:
+      post:
         summary: Delete model name
         tags:
           - Model
