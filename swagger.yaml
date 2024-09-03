@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  version: "1.0.16"
+  version: "1.0.17"
   title: "EEJI Cloudfnt-Backend API Reference"
   description: This document represents API reference of the EEJI Cloudfnt-Backend service.
   license:
@@ -618,12 +618,12 @@ definitions:
   resp_bad_request:
     type: "object"
     properties:
-      message:
+      detail:
         type: string
         description: "Error reason"
   resp_unauthorized:
     type: "object"
     properties:
-      message:
+      detail:
         type: string
         description: "Error reason"
