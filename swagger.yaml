@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  version: "1.0.17"
+  version: "1.0.18"
   title: "EEJI Cloudfnt-Backend API Reference"
   description: This document represents API reference of the EEJI Cloudfnt-Backend service.
   license:
