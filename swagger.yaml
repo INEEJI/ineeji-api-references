@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  version: "1.0.19"
+  version: "1.0.20"
   title: "EEJI Cloudfnt-Backend API Reference"
   description: This document represents API reference of the EEJI Cloudfnt-Backend service.
   license:
@@ -159,9 +159,9 @@ paths:
           description: "Internal server error"
 
   /v1/list_model:
-    x-summary: List models
+    x-summary: List models 
     get:
-      summary: Get model list owned by a user
+      summary: Get paginated list of models owned by a user
       tags:
         - Model
       parameters:
@@ -175,11 +175,16 @@ paths:
           type: "string"
           required: true
           description: "auth token"
-        - name: "EEJI-Test-Code"
-          in: "header"
+        - name: "offset"
+          in: "query"
           type: "string"
-          required: false
-          description: "custom header for testing"
+          required: true
+          description: "start index(from 0)"
+        - name: "limit"
+          in: "query"
+          type: "string"
+          required: true
+          description: "count of data(i.e. page size)"
       responses:
         200:
           description: "OK"
@@ -664,12 +669,12 @@ definitions:
   resp_bad_request:
     type: "object"
     properties:
-      detail:
+      message:
         type: string
         description: "Error reason"
   resp_unauthorized:
     type: "object"
     properties:
-      detail:
+      message:
         type: string
         description: "Error reason"
