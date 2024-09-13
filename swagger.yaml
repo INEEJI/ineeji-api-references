@@ -608,6 +608,7 @@ definitions:
       - "is_classification"
       - "state"
       - "created_at"
+      - "error_code"
     properties:
       id:
         type: "string"
@@ -627,6 +628,9 @@ definitions:
       created_at:
         type: "string"
         description: "The datetime when the model is created (ISO format)"
+      error_code:
+        type: "number"
+        description: "A specific code identifying the reason for the failure in training."
 
   model_name:
     title: model_name
