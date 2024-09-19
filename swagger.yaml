@@ -630,7 +630,7 @@ definitions:
         description: "The datetime when the model is created (ISO format)"
       error_code:
         type: "number"
-        description: "A specific code identifying the reason for the failure in training."
+        description: "A specific code identifying the reason for the failure in training. (null if no error)"
 
   model_name:
     title: model_name
