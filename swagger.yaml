@@ -189,10 +189,13 @@ paths:
         200:
           description: "OK"
           schema:
-            type: "array"
-            items:
-              type: "object"
-              $ref: "#/definitions/model_summary"
+            type: "object"
+            properties:
+              models:
+                type: "array"
+                items:
+                  type: "object"
+                  $ref: "#/definitions/model_summary"
         401:
           description: "Unauthorized"
           schema:
