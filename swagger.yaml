@@ -196,6 +196,10 @@ paths:
                 items:
                   type: "object"
                   $ref: "#/definitions/model_summary"
+        400:
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/resp_bad_request"
         401:
           description: "Unauthorized"
           schema:
