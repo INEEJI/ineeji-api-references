@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  version: "1.0.20"
+  version: "1.0.21"
   title: "EEJI Cloudfnt-Backend API Reference"
   description: This document represents API reference of the EEJI Cloudfnt-Backend service.
   license:
@@ -189,10 +189,17 @@ paths:
         200:
           description: "OK"
           schema:
-            type: "array"
-            items:
-              type: "object"
-              $ref: "#/definitions/model_summary"
+            type: "object"
+            properties:
+              models:
+                type: "array"
+                items:
+                  type: "object"
+                  $ref: "#/definitions/model_summary"
+        400:
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/resp_bad_request"
         401:
           description: "Unauthorized"
           schema:
@@ -608,6 +615,7 @@ definitions:
       - "is_classification"
       - "state"
       - "created_at"
+      - "error_code"
     properties:
       id:
         type: "string"
@@ -627,6 +635,9 @@ definitions:
       created_at:
         type: "string"
         description: "The datetime when the model is created (ISO format)"
+      error_code:
+        type: "number"
+        description: "A specific code identifying the reason for the failure in training. (null if no error)"
 
   model_name:
     title: model_name
