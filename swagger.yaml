@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  version: "1.0.21"
+  version: "1.0.22"
   title: "EEJI Cloudfnt-Backend API Reference"
   description: This document represents API reference of the EEJI Cloudfnt-Backend service.
   license:
@@ -196,6 +196,9 @@ paths:
                 items:
                   type: "object"
                   $ref: "#/definitions/model_summary"
+              total_count:
+                type: "number"
+                description: "Total count of models"
         400:
           description: "Bad Request"
           schema:
