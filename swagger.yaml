@@ -687,7 +687,7 @@ definitions:
         type: "number"
         description: "A specific code identifying the reason for the failure in training. (null if no error)"
       is_canceled:
-        type: "boolean"
+        type: "number"
         description: "The flag indicating whether the model is canceled (1: canceled, 0: not canceled)"
 
   model_name:
