@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  version: "1.1.0"
+  version: "1.1.1"
   title: "EEJI Cloudfnt-Backend API Reference"
   description: This document represents API reference of the EEJI Cloudfnt-Backend service.
   license:
@@ -770,12 +770,20 @@ definitions:
       - "symbols"
     properties:
       symbols:
-        type: "object"
-        additionalProperties:
-          type: "array"
-          items:
-            type: "number"
-        description: "A dictionary of symbols and their corresponding numeric arrays"
+        type: "array"
+        items:
+          type: "object"
+          required:
+            - "symbol_id"
+            - "horizons"
+          properties:
+            symbol_id:
+              type: "string"
+              description: "The identifier of the symbol"
+            horizons:
+              type: "string"
+              description: "Array of numbers represented as a string"
+        description: "Array of symbols with their corresponding horizon values"
 
   resp_bad_request:
     type: "object"
