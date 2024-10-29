@@ -783,6 +783,9 @@ definitions:
             horizons:
               type: "string"
               description: "Array of numbers represented as a string"
+            period:
+              type: "string"
+              description: "the period of the data"
         description: "Array of symbols with their corresponding horizon values"
 
   resp_bad_request:
