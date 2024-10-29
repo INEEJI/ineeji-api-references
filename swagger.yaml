@@ -916,20 +916,22 @@ definitions:
       - "data"
     properties:
       data:
-        type: "array"
-        items:
-          type: "object"
-          required:
-            - "date"
-          properties:
-            date:
-              type: "string"
-              format: "date"
-              description: "The date of the data point"
-            # All other properties are dynamic based on the symbol
-            additionalProperties:
-              type: "number"
-              description: "Various economic indicators and values specific to the requested symbol"
+        type: "object"
+        additionalProperties:
+          type: "array"
+          items:
+            type: "object"
+            required:
+              - "time"
+              - "value"
+            properties:
+              time:
+                type: "string"
+                format: "date"
+                description: "The date of the data point"
+              value:
+                type: "number"
+                description: "The value for the given date"
 
   resp_bad_request:
     type: "object"
