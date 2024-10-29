@@ -570,6 +570,52 @@ paths:
         500:
           description: "Internal server error"
 
+  /v2/economy/prediction/{symbol}:
+    x-summary: Get prediction for specific symbol
+    get:
+      summary: Get prediction values for a specific symbol and horizons
+      tags:
+        - economy_v2
+      parameters:
+        - name: "symbol"
+          in: "path"
+          type: "string"
+          required: true
+          description: "Symbol identifier (e.g., Hot_Rolled_Coil, Nickel)"
+        - name: "horizons"
+          in: "query"
+          type: "string"
+          required: false
+          description: "horizon values"
+        - name: "user-id"
+          in: "header"
+          type: "string"
+          required: true
+          description: "user id"
+        - name: "company-id"
+          in: "header"
+          type: "string"
+          required: true
+          description: "company id"
+        - name: "Authorization"
+          in: "header"
+          type: "string"
+          required: true
+          description: "auth token"
+        - name: "EEJI-Test-Code"
+          in: "header"
+          type: "string"
+          required: false
+          description: "custom header for testing"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/prediction_response"
+        500:
+          description: "Internal server error"
+  
+
 definitions:
   xai_result_count:
     title: xai_result_count
@@ -787,6 +833,41 @@ definitions:
               type: "string"
               description: "the period of the data"
         description: "Array of symbols with their corresponding horizon values"
+
+  prediction_response:
+    title: prediction_response
+    type: "object"
+    required:
+      - "data"
+    properties:
+      data:
+        type: "array"
+        items:
+          type: "object"
+          required:
+            - "date"
+            - "ground_truth"
+            - "horizon"
+            - "pred"
+            - "date_pred"
+          properties:
+            date:
+              type: "string"
+              format: "date"
+              description: "The date of the ground truth value"
+            ground_truth:
+              type: "number"
+              description: "The actual value at the given date"
+            horizon:
+              type: "number"
+              description: "The prediction horizon"
+            pred:
+              type: "number"
+              description: "The predicted value"
+            date_pred:
+              type: "string"
+              format: "date"
+              description: "The target date for which the prediction (pred)"
 
   resp_bad_request:
     type: "object"
