@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  version: "1.1.1"
+  version: "1.1.2"
   title: "EEJI Cloudfnt-Backend API Reference"
   description: This document represents API reference of the EEJI Cloudfnt-Backend service.
   license:
@@ -614,6 +614,46 @@ paths:
             $ref: "#/definitions/prediction_response"
         500:
           description: "Internal server error"
+
+  /v2/economy/rawdata/{symbol}:
+    x-summary: Get rawdata for specific symbol
+    get:
+      summary: Get rawdata for a specific symbol
+      tags:
+        - economy_v2
+      parameters:
+        - name: "symbol"
+          in: "path"
+          type: "string"
+          required: true
+          description: "Symbol identifier (e.g., Hot_Rolled_Coil, Nickel)"
+        - name: "user-id"
+          in: "header"
+          type: "string"
+          required: true
+          description: "user id"
+        - name: "company-id"
+          in: "header"
+          type: "string"
+          required: true
+          description: "company id"
+        - name: "Authorization"
+          in: "header"
+          type: "string"
+          required: true
+          description: "auth token"
+        - name: "EEJI-Test-Code"
+          in: "header"
+          type: "string"
+          required: false
+          description: "custom header for testing"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/rawdata_response"
+        500:
+          description: "Internal server error"
   
 
 definitions:
@@ -868,6 +908,30 @@ definitions:
               type: "string"
               format: "date"
               description: "The target date for which the prediction (pred)"
+
+  rawdata_response:
+    title: rawdata_response
+    type: "object"
+    required:
+      - "data"
+    properties:
+      data:
+        type: "object"
+        additionalProperties:
+          type: "array"
+          items:
+            type: "object"
+            required:
+              - "time"
+              - "value"
+            properties:
+              time:
+                type: "string"
+                format: "date"
+                description: "The date of the data point"
+              value:
+                type: "number"
+                description: "The value for the given date"
 
   resp_bad_request:
     type: "object"
