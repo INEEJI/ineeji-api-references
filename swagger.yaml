@@ -656,8 +656,8 @@ paths:
           description: "Internal server error"
   
 
-  /v2/economy/global_exp/{symbol}:
-    x-summary: /v2/economy/global_exp/{symbol}
+  /v2/economy/global_feature_importance/{symbol}:
+    x-summary: /v2/economy/global_feature_importance/{symbol}
     get:
       summary: Get global explanation values for a specific symbol and horizons
       tags:
@@ -668,7 +668,7 @@ paths:
           type: "string"
           required: true
           description: "Symbol identifier (e.g., Hot_Rolled_Coil, Nickel)"
-        - name: "horizons"
+        - name: "horizon"
           in: "query"
           type: "string"
           required: false
