@@ -938,7 +938,6 @@ definitions:
             - "ground_truth"
             - "horizon"
             - "pred"
-            - "date_pred"
           properties:
             date:
               type: "string"
@@ -953,10 +952,6 @@ definitions:
             pred:
               type: "number"
               description: "The predicted value"
-            date_pred:
-              type: "string"
-              format: "date"
-              description: "The target date for which the prediction (pred)"
 
   rawdata_response:
     title: rawdata_response
