@@ -582,7 +582,7 @@ paths:
           type: "string"
           required: true
           description: "Symbol identifier (e.g., Hot_Rolled_Coil, Nickel)"
-        - name: "horizons"
+        - name: "horizon"
           in: "query"
           type: "string"
           required: false
