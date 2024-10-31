@@ -536,7 +536,7 @@ paths:
           description: "Internal server error"
 
   /v2/economy/get_symbol_info: 
-    x-summary: Get symbol info
+    x-summary: /v2/economy/get_symbol_info
     get:
       summary: Get symbol info
       tags:
@@ -571,7 +571,7 @@ paths:
           description: "Internal server error"
 
   /v2/economy/prediction/{symbol}:
-    x-summary: Get prediction for specific symbol
+    x-summary: /v2/economy/prediction/{symbol}
     get:
       summary: Get prediction values for a specific symbol and horizons
       tags:
@@ -582,7 +582,7 @@ paths:
           type: "string"
           required: true
           description: "Symbol identifier (e.g., Hot_Rolled_Coil, Nickel)"
-        - name: "horizons"
+        - name: "horizon"
           in: "query"
           type: "string"
           required: false
@@ -616,7 +616,7 @@ paths:
           description: "Internal server error"
 
   /v2/economy/rawdata/{symbol}:
-    x-summary: Get rawdata for specific symbol
+    x-summary: /v2/economy/rawdata/{symbol}
     get:
       summary: Get rawdata for a specific symbol
       tags:
@@ -656,8 +656,8 @@ paths:
           description: "Internal server error"
   
 
-  /v2/economy/global_exp/{symbol}:
-    x-summary: Get global explanation for specific symbol
+  /v2/economy/global_feature_importance/{symbol}:
+    x-summary: /v2/economy/global_feature_importance/{symbol}
     get:
       summary: Get global explanation values for a specific symbol and horizons
       tags:
@@ -668,7 +668,7 @@ paths:
           type: "string"
           required: true
           description: "Symbol identifier (e.g., Hot_Rolled_Coil, Nickel)"
-        - name: "horizons"
+        - name: "horizon"
           in: "query"
           type: "string"
           required: false
@@ -907,6 +907,8 @@ definitions:
           required:
             - "symbol_id"
             - "horizons"
+            - "period"
+            - "unit"
           properties:
             symbol_id:
               type: "string"
@@ -917,7 +919,9 @@ definitions:
             period:
               type: "string"
               description: "the period of the data"
-        description: "Array of symbols with their corresponding horizon values"
+            unit:
+              type: "string"
+              description: "the unit of the data"
 
   prediction_response:
     title: prediction_response
@@ -934,7 +938,6 @@ definitions:
             - "ground_truth"
             - "horizon"
             - "pred"
-            - "date_pred"
           properties:
             date:
               type: "string"
@@ -949,10 +952,6 @@ definitions:
             pred:
               type: "number"
               description: "The predicted value"
-            date_pred:
-              type: "string"
-              format: "date"
-              description: "The target date for which the prediction (pred)"
 
   rawdata_response:
     title: rawdata_response
