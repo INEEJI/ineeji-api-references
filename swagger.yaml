@@ -907,6 +907,8 @@ definitions:
           required:
             - "symbol_id"
             - "horizons"
+            - "period"
+            - "unit"
           properties:
             symbol_id:
               type: "string"
@@ -917,7 +919,9 @@ definitions:
             period:
               type: "string"
               description: "the period of the data"
-        description: "Array of symbols with their corresponding horizon values"
+            unit:
+              type: "string"
+              description: "the unit of the data"
 
   prediction_response:
     title: prediction_response
