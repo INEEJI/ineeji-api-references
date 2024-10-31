@@ -536,7 +536,7 @@ paths:
           description: "Internal server error"
 
   /v2/economy/get_symbol_info: 
-    x-summary: Get symbol info
+    x-summary: /v2/economy/get_symbol_info
     get:
       summary: Get symbol info
       tags:
@@ -571,7 +571,7 @@ paths:
           description: "Internal server error"
 
   /v2/economy/prediction/{symbol}:
-    x-summary: Get prediction for specific symbol
+    x-summary: /v2/economy/prediction/{symbol}
     get:
       summary: Get prediction values for a specific symbol and horizons
       tags:
@@ -616,7 +616,7 @@ paths:
           description: "Internal server error"
 
   /v2/economy/rawdata/{symbol}:
-    x-summary: Get rawdata for specific symbol
+    x-summary: /v2/economy/rawdata/{symbol}
     get:
       summary: Get rawdata for a specific symbol
       tags:
@@ -657,7 +657,7 @@ paths:
   
 
   /v2/economy/global_exp/{symbol}:
-    x-summary: Get global explanation for specific symbol
+    x-summary: /v2/economy/global_exp/{symbol}
     get:
       summary: Get global explanation values for a specific symbol and horizons
       tags:
