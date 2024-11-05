@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  version: "1.1.2"
+  version: "1.1.3"
   title: "EEJI Cloudfnt-Backend API Reference"
   description: This document represents API reference of the EEJI Cloudfnt-Backend service.
   license:
@@ -655,6 +655,56 @@ paths:
         500:
           description: "Internal server error"
   
+  /v2/economy/local_attribution_by_date/{symbol}:
+    x-summary: /v2/economy/local_attribution_by_date/{symbol}
+    get:
+      summary: Get global explanation values for a specific symbol and horizons
+      tags:
+        - economy_v2
+      parameters:
+        - name: "symbol"
+          in: "path"
+          type: "string"
+          required: true
+          description: "Symbol identifier (e.g., Hot_Rolled_Coil, Nickel)"
+        - name: "horizon"
+          in: "query"
+          type: "string"
+          required: false
+          description: "horizon values"
+        - name: "date"
+          in: "query"
+          type: "string"
+          required: false
+          description: "date values"
+        - name: "is_pred_date"
+          in: "query"
+          type: "string"
+          required: false
+          description: "is prediction date or not"
+        - name: "user-id"
+          in: "header"
+          type: "string"
+          required: true
+          description: "user id"
+        - name: "company-id"
+          in: "header"
+          type: "string"
+          required: true
+          description: "company id"
+        - name: "Authorization"
+          in: "header"
+          type: "string"
+          required: true
+          description: "auth token"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/local_attribution_by_date_response"
+        500:
+          description: "Internal server error"
+
 
   /v2/economy/global_feature_importance/{symbol}:
     x-summary: /v2/economy/global_feature_importance/{symbol}
@@ -1037,3 +1087,50 @@ definitions:
       detail:
         type: string
         description: "Error reason"
+  
+  local_attribution_by_date_response:
+    title: local_attribution_by_date_response
+    type: "object"
+    required:
+      - "data"
+    properties:
+      data:
+        type: "array"
+        items:
+          type: "object"
+          required:
+            - "feature_impact"
+            - "date"
+            - "date_pred"
+            - "dt"
+            - "horizon"
+            - "is_pred_date"
+            - "name"
+          properties:
+            feature_impact:
+              type: "array"
+              items:
+                type: "object"
+                required:
+                  - "feature_name"
+                  - "impact"
+                properties:
+                  feature_name:
+                    type: "string"
+                    description: "Name of the feature"
+                  impact:
+                    type: "number"
+                    description: "impact value of the feature"
+            name:
+              type: "string"
+              description: "Symbol name"
+            horizon:
+              type: "number"
+              description: "Prediction horizon"
+            dt:
+              type: "string"
+              format: "date"
+              description: "Date of the explanation"
+            is_pred_date:
+              type: "number"
+              description: "Is prediction date or not (1: prediction date, 0: not prediction date)"
