@@ -258,6 +258,37 @@ paths:
         500:
           description: "Internal server error"
 
+  # 데이터셋 리스트
+  /dataset_list/{user_id}:
+    x-summary: List datasets from database
+    post:
+      summary: List datasets from database
+      parameters:
+        - name: "user_id"
+          in: "path"
+          type: "str"
+          required: true
+          description: "user_id"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: "object"
+            properties:
+              data:
+                type: "array"
+                items:
+                  type: "object"
+                  $ref: "#/definitions/dataset_list_response"
+        401:
+          description: "Unauthorized"
+          schema:
+            $ref: "#/definitions/resp_unauthorized"
+        422:
+          description: "Unprocessable Entity"
+        500:
+          description: "Internal server error"
+
   /v1/rename_model/{model_id}:
       x-summary: Rename model name
       patch:
