@@ -429,10 +429,11 @@ paths:
           500:
             description: "Internal server error"
 
+  # 이게 어떤 API인지 확인이 필요해보임 / 그에 따라 API path 수정 필요 [ POST]
   /v1/delete_model/{model_id}:
-      x-summary: Delete model name
+      x-summary: Delete the model corresponding to the model_id.
       post:
-        summary: Delete model name
+        summary: Delete the model corresponding to the model_id(object in Bucket, DB).
         tags:
           - Model
         parameters:
@@ -441,12 +442,12 @@ paths:
             type: "string"
             required: true
             description: "model id"
-          - name: "user-id"
+          - name: "user_id"
             in: "header"
             type: "string"
             required: true
             description: "user id"
-          - name: "company-id"
+          - name: "company_id"
             in: "header"
             type: "string"
             required: true
