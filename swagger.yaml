@@ -289,6 +289,54 @@ paths:
         500:
           description: "Internal server error"
 
+  /edit_data/{user_id}:
+    x-summary: Modifies dataset information(name, desc)
+    patch:
+      summary: modify dataset name & desc
+      # tags:
+      parameters:
+        - name: "user_id"
+          in: "path"
+          type: "string"
+          required: true
+          description: "The user_id"
+        
+        - name: "company_id"
+          in: "header"
+          type: "string"
+          required: true
+          description: "The company_id"
+        - name: "user_id"
+          in: "header"
+          type: "string"
+          required: true
+          description: "The user_id"
+        - name: "dataset_id"
+          in: "header"
+          type: "string"
+          required: true
+          description: "The dataset_id"
+        - name: "dataset_name"
+          in: "header"
+          type: "string"
+          required: false
+          description: "The name of the dataset name"
+        - name: "datatet_description"
+          in: "header"
+          type: "string"
+          required: false
+          description: "datatet_description"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: "object"
+            properties:
+              state:
+                type: string
+        500:
+          description: "Internal server error"
+
   /v1/rename_model/{model_id}:
       x-summary: Rename model name
       patch:
