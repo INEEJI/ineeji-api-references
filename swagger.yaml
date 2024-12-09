@@ -925,6 +925,84 @@ definitions:
         type: "string"
         description: "The signed url of the GCS object"
 
+  dataset_list_response:
+    title: dataset_list
+    type: "object"
+    required:
+      - "user_id"
+      - "com_id"
+      - "ds_id"
+      - "name"
+      - "size"
+      - "create_date"
+      - "update_date"
+      - "start_date"
+      - "end_date"
+      - "date_col"
+      - "target_y"
+      - "descr"
+      - "loc"
+      - "col_list"
+      - "numeric_cols"
+      - "non_numeric_cols"
+      - "is_classification"
+    properties:
+      user_id:
+        type: "string"
+        description: "The user_id"
+      com_id:
+        type: "string"
+        description: "The company_id"
+      ds_id:
+        type: "string"
+        description: "dataset_id"
+      name:
+        type: "string"
+        description: "The name of the dataset name"
+      size:
+        type: "number"
+        description: "The size of the dataset name"
+      create_date:
+        type: "string"
+        format: "date"
+        description: "The create date of the model"
+      update_date:
+        type: "string"
+        format: "date"
+        description: "The update date of the model"
+      start_date:
+        type: "string"
+        format: "date"
+        description: "(optional)"
+      end_date:
+        type: "string"
+        format: "date"
+        description: "(optional)"
+      date_col:
+        type: "string"
+        description: "(optional) The date column"
+      target_y:
+        type: "string"
+        description: "(optional) The target column"
+      descr:
+        type: "string"
+        description: "(optional) The dataset description"
+      loc:
+        type: "string"
+        description: ""
+      col_list:
+        type: "string"
+        description: "(optional)"
+      numeric_cols:
+        type: "string"
+        description: "(optional)"
+      non_numeric_cols:
+        type: "string"
+        description: "(optional)"
+      is_classification:
+        type: "boolean"
+        description: "flag indicating whether the data is classification (default: False)"
+
   symbol_info_response:
     title: symbol_info_response
     type: "object"
