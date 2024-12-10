@@ -565,8 +565,8 @@ paths:
         500:
           description: "Internal server error"
 
-  /v2/economy/prediction_v2/{symbol}:
-    x-summary: /v2/economy/prediction_v2/{symbol}
+  /v2/economy/prediction_v2/{symbol}?horizon={horizon}:
+    x-summary: /v2/economy/prediction_v2/{symbol}?horizon={horizon}
     get:
       summary: Get prediction values for a specific symbol and horizons
       tags:
@@ -638,8 +638,8 @@ paths:
           description: "Internal server error"
   
 
-  /v2/economy/global_feature_importance/{symbol}:
-    x-summary: /v2/economy/global_feature_importance/{symbol}
+  /v2/economy/global_feature_importance/{symbol}?horizon={horizon}:
+    x-summary: /v2/economy/global_feature_importance/{symbol}?horizon={horizon}
     get:
       summary: Get global explanation values for a specific symbol and horizons
       tags:
@@ -679,8 +679,8 @@ paths:
         500:
           description: "Internal server error"
 
-  /v2/economy/get_prediction_metric/{symbol}:
-    x-summary: /v2/economy/get_prediction_metric/{symbol}
+  /v2/economy/get_prediction_metric/{symbol}?horizon={horizon}:
+    x-summary: /v2/economy/get_prediction_metric/{symbol}?horizon={horizon}
     get:
       summary: Get global prediction metric values for a specific symbol and horizons
       tags:
