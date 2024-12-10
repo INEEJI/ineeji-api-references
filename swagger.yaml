@@ -1028,6 +1028,8 @@ definitions:
                 required:
                   - "date_pred"
                   - "ground_truth"
+                  - "lower_bound"
+                  - "upper_bound"
                   - "pred"
                   - "date"
                 properties:
@@ -1041,6 +1043,12 @@ definitions:
                   pred:
                     type: ["number", "null"]
                     description: "The predicted value (can be null)"
+                  lower_bound:
+                    type: ["number", "null"]
+                    description: "The lower bound of the prediction (can be null)"
+                  upper_bound:
+                    type: ["number", "null"]
+                    description: "The upper bound of the prediction (can be null)"
                   date:
                     type: "string"
                     format: "date"
