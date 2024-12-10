@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  version: "1.1.3"
+  version: "1.1.4"
   title: "EEJI Cloudfnt-Backend API Reference"
   description: This document represents API reference of the EEJI Cloudfnt-Backend service.
   license:
@@ -565,8 +565,8 @@ paths:
         500:
           description: "Internal server error"
 
-  /v2/economy/prediction/{symbol}:
-    x-summary: /v2/economy/prediction/{symbol}
+  /v2/economy/prediction_v2/{symbol}?horizon={horizon}:
+    x-summary: /v2/economy/prediction_v2/{symbol}?horizon={horizon}
     get:
       summary: Get prediction values for a specific symbol and horizons
       tags:
@@ -638,8 +638,8 @@ paths:
           description: "Internal server error"
   
 
-  /v2/economy/global_feature_importance/{symbol}:
-    x-summary: /v2/economy/global_feature_importance/{symbol}
+  /v2/economy/global_feature_importance/{symbol}?horizon={horizon}:
+    x-summary: /v2/economy/global_feature_importance/{symbol}?horizon={horizon}
     get:
       summary: Get global explanation values for a specific symbol and horizons
       tags:
@@ -652,8 +652,8 @@ paths:
           description: "Symbol identifier (e.g., Hot_Rolled_Coil, Nickel)"
         - name: "horizon"
           in: "query"
-          type: "string"
-          required: false
+          type: "integer"
+          required: true
           description: "horizon values"
         - name: "user-id"
           in: "header"
@@ -670,16 +670,110 @@ paths:
           type: "string"
           required: true
           description: "auth token"
-        - name: "EEJI-Test-Code"
-          in: "header"
-          type: "string"
-          required: false
-          description: "custom header for testing"
+
       responses:
         200:
           description: "OK"
           schema:
             $ref: "#/definitions/global_explanation_response"
+        500:
+          description: "Internal server error"
+
+  /v2/economy/get_prediction_metric/{symbol}?horizon={horizon}:
+    x-summary: /v2/economy/get_prediction_metric/{symbol}?horizon={horizon}
+    get:
+      summary: Get global prediction metric values for a specific symbol and horizons
+      tags:
+        - economy_v2
+      parameters:
+        - name: "symbol"
+          in: "path"
+          type: "string"
+          required: true
+          description: "Symbol identifier (e.g., Hot_Rolled_Coil, Nickel)"
+        - name: "horizon"
+          in: "query"
+          type: "integer"
+          required: true
+          description: "horizon values"
+        - name: "user-id"
+          in: "header"
+          type: "string"
+          required: true
+          description: "user id"
+        - name: "company-id"
+          in: "header"
+          type: "string"
+          required: true
+          description: "company id"
+        - name: "Authorization"
+          in: "header"
+          type: "string"
+          required: true
+          description: "auth token"
+          
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/prediction_metric_response"
+        500:
+          description: "Internal server error"
+
+
+  /v2/economy/local_attribution_by_date/{symbol}:
+    x-summary: /v2/economy/local_attribution_by_date/{symbol}
+    get:
+      summary: Get local attribution values for a specific symbol and horizons
+      tags:
+        - economy_v2
+      parameters:
+        - name: "symbol"
+          in: "path"
+          type: "string"
+          required: true
+          description: "Symbol identifier (e.g., Hot_Rolled_Coil, Nickel)"
+        - name: "horizon"
+          in: "query"
+          type: "integer"
+          required: true
+          description: "horizon value"
+        - name: "date"
+          in: "query"
+          type: "string"
+          required: true
+          description: "The date to get local attribution for (YYYY-MM-DD format)"
+        - name: "is_pred_date"
+          in: "query"
+          type: "integer"
+          required: true
+          description: "Flag indicating if the date is prediction date (1) or base date (0)"
+        - name: "is_sorted"
+          in: "query"
+          type: "integer"
+          required: false
+          description: "Flag indicating if the results should be sorted (1) or not (0). default: 0"
+        - name: "user-id"
+          in: "header"
+          type: "string"
+          required: true
+          description: "user id"
+        - name: "company-id"
+          in: "header"
+          type: "string"
+          required: true
+          description: "company id"
+        - name: "Authorization"
+          in: "header"
+          type: "string"
+          required: true
+          description: "auth token"
+          
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/local_attribution_response"
         500:
           description: "Internal server error"
 
@@ -946,7 +1040,7 @@ definitions:
                     description: "The actual value (can be null)"
                   pred:
                     type: ["number", "null"]
-                    description: "The predicted value"
+                    description: "The predicted value (can be null)"
                   date:
                     type: "string"
                     format: "date"
@@ -984,7 +1078,7 @@ definitions:
                     description: "The date of the data point"
                   value:
                     type: ["number", "null"]
-                    description: "The value for the given date"
+                    description: "The value for the given date (can be null)"
           name:
             type: "string"
             description: "Symbol name"
@@ -1034,6 +1128,118 @@ definitions:
               format: "date"
               description: "Date of the explanation"
 
+  prediction_metric_response:
+    title: prediction_metric_response
+    type: "object"
+    required:
+      - "data"
+    properties:
+      data:
+        type: "object"
+        required:
+          - "metric_information"
+          - "name"
+          - "horizon"
+          - "dt"
+        properties:
+          metric_information:
+            type: "array"
+            items:
+              type: "object"
+              required:
+                - "metric_name"
+                - "score"
+              properties:
+                metric_name:
+                  type: "string"
+                  description: "Name of the metric (e.g., MAE, MAPE, PCD, R2)"
+                score:
+                  type: "number"
+                  description: "Score of the metric"
+          name:
+            type: "string"
+            description: "Symbol name"
+          horizon:
+            type: "number"
+            description: "Prediction horizon"
+          dt:
+            type: "string"
+            format: "date"
+            description: "Date of the metric generation"
+
+  local_attribution_response:
+    title: local_attribution_response
+    type: "object"
+    required:
+      - "data"
+    properties:
+      data:
+        type: "object"
+        required:
+          - "feature_impact"
+          - "name"
+          - "horizon"
+          - "is_pred_date"
+          - "is_sorted"
+          - "date"
+          - "date_pred"
+          - "date_input"
+          - "dt"
+        properties:
+          feature_impact:
+            type: "array"
+            items:
+              type: "object"
+              required:
+                - "feature_name"
+                - "impact"
+                - "input_value_delta"
+                - "input_value_delta_percentage"
+              properties:
+                feature_name:
+                  type: "string"
+                  description: "Name of the feature"
+                impact:
+                  type: "number"
+                  description: "Impact of the feature"
+                input_value_delta:
+                  type: "number"
+                  description: "Delta of the input value"
+                input_value_delta_percentage:
+                  type: "number"
+                  description: "Delta percentage of the input value"
+          name:
+            type: "string"
+            description: "Symbol name"
+          horizon:
+            type: "number"
+            description: "Prediction horizon"
+          is_pred_date:
+            type: "number"
+            description: "Flag indicating if the date is prediction date (1) or base date (0), defalut 0"
+          is_sorted:
+            type: "number"
+            description: "Flag indicating if the results should be sorted (true) or not (false), defalut 0"
+          date:   
+            type: "string"
+            format: "date"
+            description: "Date of the attribution"
+          date_pred:
+            type: "string"
+            format: "date"
+            description: "Prediction date of the attribution"
+          date_input:
+            type: "string"
+            format: "date"
+            description: "Input date of the attribution"
+          dt:
+            type: "string"
+            format: "date"
+            description: "Date of the attribution"
+
+
+
+        
   resp_bad_request:
     type: "object"
     properties:
