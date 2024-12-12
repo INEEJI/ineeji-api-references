@@ -312,9 +312,9 @@ paths:
             description: "Internal server error"
 
   /v1/delete_model/{model_id}:
-      x-summary: Delete model name
-      post:
-        summary: Delete model name
+      x-summary: Delete model data
+      delete:
+        summary: Delete the model files from the bucket and remove the model data from the database.
         tags:
           - Model
         parameters:
