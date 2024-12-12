@@ -565,42 +565,6 @@ paths:
         500:
           description: "Internal server error"
 
-  /v2/economy/prediction_v2/{symbol}?horizon={horizon}:
-    x-summary: /v2/economy/prediction_v2/{symbol}?horizon={horizon}
-    get:
-      summary: Get prediction values for a specific symbol and horizons
-      tags:
-        - economy_v2
-      parameters:
-        - name: "symbol"
-          in: "path"
-          type: "string"
-          required: true
-          description: "Symbol identifier (e.g., Hot_Rolled_Coil, Nickel)"
-        - name: "user-id"
-          in: "header"
-          type: "string"
-          required: true
-          description: "user id"
-        - name: "company-id"
-          in: "header"
-          type: "string"
-          required: true
-          description: "company id"
-        - name: "Authorization"
-          in: "header"
-          type: "string"
-          required: true
-          description: "auth token"
-
-      responses:
-        200:
-          description: "OK"
-          schema:
-            $ref: "#/definitions/prediction_response"
-        500:
-          description: "Internal server error"
-
   /v2/economy/rawdata_v2/{symbol}:
     x-summary: /v2/economy/rawdata_v2/{symbol}
     get:
@@ -636,7 +600,43 @@ paths:
             $ref: "#/definitions/rawdata_response"
         500:
           description: "Internal server error"
-  
+
+  /v2/economy/prediction_v2/{symbol}?horizon={horizon}:
+    x-summary: /v2/economy/prediction_v2/{symbol}?horizon={horizon}
+    get:
+      summary: Get prediction values for a specific symbol and horizons
+      tags:
+        - economy_v2
+      parameters:
+        - name: "symbol"
+          in: "path"
+          type: "string"
+          required: true
+          description: "Symbol identifier (e.g., Hot_Rolled_Coil, Nickel)"
+        - name: "user-id"
+          in: "header"
+          type: "string"
+          required: true
+          description: "user id"
+        - name: "company-id"
+          in: "header"
+          type: "string"
+          required: true
+          description: "company id"
+        - name: "Authorization"
+          in: "header"
+          type: "string"
+          required: true
+          description: "auth token"
+
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/prediction_response"
+        500:
+          description: "Internal server error"
+ 
 
   /v2/economy/global_feature_importance/{symbol}?horizon={horizon}:
     x-summary: /v2/economy/global_feature_importance/{symbol}?horizon={horizon}
@@ -721,8 +721,8 @@ paths:
           description: "Internal server error"
 
 
-  /v2/economy/local_attribution_by_date/{symbol}:
-    x-summary: /v2/economy/local_attribution_by_date/{symbol}
+  /v2/economy/local_attribution_by_date/{symbol}?horizon={horizon}&date={date}&is_pred_date={is_pred_date}&is_sorted={is_sorted}:
+    x-summary: /v2/economy/local_attribution_by_date/{symbol}?horizon={horizon}&date={date}&is_pred_date={is_pred_date}&is_sorted={is_sorted}
     get:
       summary: Get local attribution values for a specific symbol and horizons
       tags:
@@ -1028,6 +1028,8 @@ definitions:
                 required:
                   - "date_pred"
                   - "ground_truth"
+                  - "lower_bound"
+                  - "upper_bound"
                   - "pred"
                   - "date"
                 properties:
@@ -1041,6 +1043,12 @@ definitions:
                   pred:
                     type: ["number", "null"]
                     description: "The predicted value (can be null)"
+                  lower_bound:
+                    type: ["number", "null"]
+                    description: "The lower bound of the prediction (can be null)"
+                  upper_bound:
+                    type: ["number", "null"]
+                    description: "The upper bound of the prediction (can be null)"
                   date:
                     type: "string"
                     format: "date"
