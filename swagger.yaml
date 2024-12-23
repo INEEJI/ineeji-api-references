@@ -263,6 +263,8 @@ paths:
     x-summary: List datasets from database
     post:
       summary: List datasets from database
+      tags:
+        - Model
       parameters:
         - name: "user_id"
           in: "path"
@@ -293,7 +295,8 @@ paths:
     x-summary: Modifies dataset information(name, desc)
     patch:
       summary: modify dataset name & desc
-      # tags:
+      tags:
+        - Data
       parameters:
         - name: "user_id"
           in: "path"
@@ -341,7 +344,8 @@ paths:
     x-summary: Deletes a CSV file and its corresponding database entry
     delete:
       summary: Deletes a CSV file and its corresponding database entry
-      # tags:
+      tags:
+        - Data
       parameters:
         - name: "user_id"
           in: "path"
@@ -657,6 +661,8 @@ paths:
     x-summary: Endpoint for fully predicting with a model
     post:
       summary: Endpoint for fully predicting with a model
+      tags:
+        - Model
       parameters:
         - name: "aio"
           in: "query"
