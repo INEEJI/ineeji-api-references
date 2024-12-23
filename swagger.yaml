@@ -301,28 +301,28 @@ paths:
           required: true
           description: "The user_id"
         
-        - name: "company_id"
-          in: "header"
+        - name: "com_id"
+          in: "query"
           type: "string"
           required: true
           description: "The company_id"
-        - name: "user_id"
-          in: "header"
+        - name: "user-id"
+          in: "query"
           type: "string"
           required: true
           description: "The user_id"
-        - name: "dataset_id"
-          in: "header"
+        - name: "ds_id"
+          in: "query"
           type: "string"
           required: true
           description: "The dataset_id"
-        - name: "dataset_name"
-          in: "header"
+        - name: "ds_name"
+          in: "query"
           type: "string"
           required: false
           description: "The name of the dataset name"
-        - name: "datatet_description"
-          in: "header"
+        - name: "ds_desc"
+          in: "query"
           type: "string"
           required: false
           description: "datatet_description"
@@ -349,18 +349,18 @@ paths:
           required: true
           description: "The user_id"
         
-        - name: "company_id"
-          in: "header"
+        - name: "com_id"
+          in: "query"
           type: "string"
           required: true
           description: "The company_id"
         - name: "user_id"
-          in: "header"
+          in: "query"
           type: "string"
           required: true
           description: "The user_id"
-        - name: "dataset_id"
-          in: "header"
+        - name: "ds_id"
+          in: "query"
           type: "string"
           required: true
           description: "The dataset_id"
