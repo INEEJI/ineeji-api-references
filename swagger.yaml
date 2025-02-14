@@ -688,6 +688,36 @@ paths:
         500:
           description: "Internal server error"
 
+  /train_model:
+    x-summary: "Create Model or Retrain model"
+    post:
+      summary: "Create Model or Retrain model"
+      tags:
+        - Model
+      parameters:
+        - name: "body"
+          in: "body"
+          description: "by train model type request body"
+          required: true
+          schema:
+            type: "object"
+            $ref: "#/definitions/train_model"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: object
+            properties:
+              state:
+                type: string
+        422:
+          description: "Unprocessable Entity"
+        452:
+          description: "1st model creation error or retrain error"
+        500:
+          description: "Internal server error"
+
+
   /v2/economy/get_symbol_info: 
     x-summary: /v2/economy/get_symbol_info
     get:
@@ -1012,6 +1042,57 @@ definitions:
       if_classification:
         type: "boolean"
         description: "flag indicating whether the data is classification (default: False)"
+
+  train_model:
+    title: train_model
+    type: "object"
+    required:
+      - user_id
+      - com_id
+      - dataset_id
+      - y_value
+      - if_classification
+      - retrain
+    properties:
+      user_id:
+        type: "string"
+        description: "The user id"
+      com_id:
+        type: "string"
+        description: "The company_id"
+      dataset_id:
+        type: "string"
+        description: "The dataset_id"
+      date_col:
+        type: "string"
+        description: "(optional) The date column"
+      x_value:
+        type: "array"
+        description: "(optional) x_value"
+      y_value:
+        type: "string"
+        description: "y_value"
+      if_classification:
+        type: "boolean"
+        description: "flag indicating whether the data is classification (default: False)"
+      retrain:
+        type: "object"
+        description: "(optional) retrain info"
+        required:
+          - previous_model_id
+          - delta_importance
+          - mode
+        properties:
+          previous_model_id:
+            type: "string"
+            description: "Previously the trained model ID"
+          delta_importance:
+            type: "object"
+            description: "The importance object data of the trained model"
+          mode:
+            type: "string"
+            description: "An Enum type that can be either 'delpoy' or 'tune'"
+
 
   new_dataset:
     title: new_dataset
