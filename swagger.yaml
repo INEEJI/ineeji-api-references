@@ -1174,7 +1174,7 @@ definitions:
       - "created_at"
       - "error_code"
       - "is_canceled"
-      - "mode"
+      - "train_mode"
     properties:
       id:
         type: "string"
@@ -1200,7 +1200,7 @@ definitions:
       is_canceled:
         type: "number"
         description: "The flag indicating whether the model is canceled (1: canceled, 0: not canceled)"
-      mode:
+      train_mode:
         type: "number"
         description: "The model infomation for model retraining"
 
