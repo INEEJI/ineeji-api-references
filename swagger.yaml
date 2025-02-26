@@ -695,6 +695,16 @@ paths:
       tags:
         - Model
       parameters:
+        - name: "user-id"
+          in: "header"
+          type: "string"
+          description: "The user_id"
+          required: true
+        - name: "com-id"
+          in: "header"
+          type: "string"
+          description: "The company_id"
+          required: true
         - name: "body"
           in: "body"
           description: "by train model type request body"
@@ -1047,19 +1057,11 @@ definitions:
     title: train_model
     type: "object"
     required:
-      - user_id
-      - com_id
       - dataset_id
       - y_value
       - if_classification
       - retrain
     properties:
-      user_id:
-        type: "string"
-        description: "The user id"
-      com_id:
-        type: "string"
-        description: "The company_id"
       dataset_id:
         type: "string"
         description: "The dataset_id"
@@ -1172,7 +1174,7 @@ definitions:
       - "created_at"
       - "error_code"
       - "is_canceled"
-      - "mode"
+      - "train_mode"
     properties:
       id:
         type: "string"
@@ -1198,7 +1200,7 @@ definitions:
       is_canceled:
         type: "number"
         description: "The flag indicating whether the model is canceled (1: canceled, 0: not canceled)"
-      mode:
+      train_mode:
         type: "number"
         description: "The model infomation for model retraining"
 
