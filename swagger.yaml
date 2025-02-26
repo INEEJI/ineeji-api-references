@@ -1130,6 +1130,7 @@ definitions:
       - "created_at"
       - "updated_at"
       - "dataset_name"
+      - "ds_id"
     properties:
       id:
         type: "string"
@@ -1155,6 +1156,9 @@ definitions:
       dataset_name:
         type: "string"
         description: "The name of dataset"
+      ds_id:
+        type: "string"
+        description: "The name of dataset ID"
       accuracy:
         type: "number"
         description: "The model accuracy"
