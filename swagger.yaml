@@ -1131,6 +1131,8 @@ definitions:
       - "updated_at"
       - "dataset_name"
       - "ds_id"
+      - "prev_model_id"
+      - "prev_model_name"
     properties:
       id:
         type: "string"
@@ -1158,7 +1160,13 @@ definitions:
         description: "The name of dataset"
       ds_id:
         type: "string"
-        description: "The name of dataset ID"
+        description: "The dataset ID"
+      prev_model_id:
+        type: "string"
+        description: "The previous model ID"
+      prev_model_name:
+        type: "string"
+        description: "The model name of previous model ID"
       accuracy:
         type: "number"
         description: "The model accuracy"
